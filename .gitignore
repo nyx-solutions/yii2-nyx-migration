@@ -84,6 +84,7 @@ _shortcuts
 .composer-install.cmd
 .composer-update.cmd
 /vendor
+/composer.lock
 
 # BackWPup #
 ######################
