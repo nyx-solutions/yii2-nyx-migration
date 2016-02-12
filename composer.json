@@ -1,0 +1,26 @@
+{
+  "name": "jsas-development/yii2-nox-migration",
+  "description": "Yii2 Migration Toolkit Extended",
+  "type": "yii2-extension",
+  "keywords": [
+    "yii2",
+    "extension",
+    "migration"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Jonatas Sas",
+      "email": "atendimento@jsas.com.br"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "yiisoft/yii2": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "nox\\migrations\\": ""
+    }
+  }
+}

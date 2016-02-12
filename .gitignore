@@ -83,6 +83,7 @@ _shortcuts
 ######################
 .composer-install.cmd
 .composer-update.cmd
+/vendor
 
 # BackWPup #
 ######################
