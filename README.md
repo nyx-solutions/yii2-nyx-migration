@@ -1,1 +1,1 @@
-# yii2-nox-migration
+# Yii2 NOX Migration
