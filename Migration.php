@@ -1,6 +1,6 @@
 <?php
 
-    namespace nox\migrations\Migration;
+    namespace nox\db;
 
     use yii\base\NotSupportedException;
     use yii\db\Connection;

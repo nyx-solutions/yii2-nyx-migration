@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "nox\\migrations\\": ""
+      "nox\\db\\": ""
     }
   },
   "config": {
