@@ -1,5 +1,5 @@
 {
-  "name": "jsas-development/yii2-nox-migration",
+  "name": "nox-it/yii2-nox-migration",
   "description": "Yii2 Migration Toolkit Extended",
   "type": "yii2-extension",
   "keywords": [
@@ -29,5 +29,11 @@
     "branch-alias": {
       "dev-master": "master"
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/nox-it/yii2-nox-migration"
+    }
+  ],
 }
