@@ -4,6 +4,7 @@
 
     use yii\base\NotSupportedException;
     use yii\db\Connection;
+    use yii\db\Expression;
 
     /**
      * Class Migration
@@ -105,6 +106,52 @@
                 return false;
             }
         }
+
+        /**
+         * @return string
+         */
+        protected function getTableOptions()
+        {
+            return $this->tableOptions;
+        }
+        #endregion
+
+        #region DataBase FKs
+        /**
+         * @inheritdoc
+         */
+        public function addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete = null, $update = null)
+        {
+            $indexName = $name;
+
+            if (preg_match('/\}\}$/', $indexName)) {
+                $indexName = preg_replace('/^(.*)\}\}$/', '$1_idx}}', $indexName);
+            } else {
+                $indexName .= '_idx';
+            }
+
+            $this->createIndex($indexName, $table, $columns);
+
+            parent::addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete, $update);
+        }
+
+        /**
+         * Builds a SQL statement for adding a foreign key constraint to an existing table (without index creation).
+         * The method will properly quote the table and column names.
+         * @param string $name the name of the foreign key constraint.
+         * @param string $table the table that the foreign key constraint will be added to.
+         * @param string|array $columns the name of the column to that the constraint will be added on. If there are multiple columns, separate them with commas or use an array.
+         * @param string $refTable the table that the foreign key references to.
+         * @param string|array $refColumns the name of the column that the foreign key references to. If there are multiple columns, separate them with commas or use an array.
+         * @param string $delete the ON DELETE option. Most DBMS support these options: RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+         * @param string $update the ON UPDATE option. Most DBMS support these options: RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+         *
+         * @see addForeignKey
+         */
+        public function addForeignKeyWithoutIndex($name, $table, $columns, $refTable, $refColumns, $delete = null, $update = null)
+        {
+            parent::addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete, $update);
+        }
         #endregion
 
         #region DataBase Views
@@ -140,26 +187,6 @@
 
         #region DataBase Table Names
         /**
-         * @param string $name
-         *
-         * @return string
-         */
-        public function getTableName($name = '')
-        {
-            return '{{%'.((!empty($name)) ? $name : $this->getSimpleTableName()).'}}';
-        }
-
-        /**
-         * @param string $name
-         *
-         * @return string
-         */
-        public function withTableName($name)
-        {
-            return '{{%'.$this->getSimpleTableName().'_'.$name.'}}';
-        }
-
-        /**
          * @return string
          */
         protected function getSimpleTableName()
@@ -171,6 +198,54 @@
 
             return $tableName;
         }
+
+        /**
+         * @param string $name
+         *
+         * @return string
+         */
+        public function getTableName($name = '')
+        {
+            return '{{%'.((!empty($name)) ? $name : $this->getSimpleTableName()).'}}';
+        }
+
+        /**
+         * @return string
+         */
+        public function getCurrentTableName()
+        {
+            return $this->getTableName();
+        }
+
+        /**
+         * @param string $name
+         *
+         * @return string
+         */
+        public function withTableName($name)
+        {
+            return '{{%'.$this->getSimpleTableName().'_'.$name.'}}';
+        }
         #endregion
+        #endregion
+
+        #region SchemaBuilderTrait
+        /**
+         * @inheritdoc
+         */
+        public function boolean()
+        {
+            $boolean = parent::boolean();
+
+            return $this->smallInteger(1);
+        }
+
+        /**
+         * @return Expression
+         */
+        public function now()
+        {
+            return new Expression('NOW()');
+        }
         #endregion
     }
