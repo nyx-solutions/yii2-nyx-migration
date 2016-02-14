@@ -10,7 +10,7 @@
     "php"
   ],
   "license": "Apache-2.0",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "authors": [
     {
       "name": "Jonatas Sas",
@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "nox\\db\\": ""
+      "nox\\db\\": "db/"
     }
   },
   "config": {
