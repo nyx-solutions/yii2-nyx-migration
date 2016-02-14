@@ -4,21 +4,24 @@
 
     use yii\base\NotSupportedException;
     use yii\db\Connection;
-    use yii\db\Expression;
 
     /**
      * Class Migration
      *
      * @package nox\migrations\Migration
+     *
+     * @author Jonatas Sas <atendimento@jsas.com.br>
      */
     class Migration extends \yii\db\Migration
     {
-        #region Constants
-        const YES             = 1;
-        const NO              = 0;
+        use SchemaBuilderTrait;
 
-        const STATUS_ACTIVE   = 1;
-        const STATUS_INACTIVE = 0;
+        #region Constants
+        const YES             = Schema::YES;
+        const NO              = Schema::NO;
+
+        const STATUS_ACTIVE   = Schema::YES;
+        const STATUS_INACTIVE = Schema::NO;
         #endregion
 
         /**
@@ -227,25 +230,5 @@
             return '{{%'.$this->getSimpleTableName().'_'.$name.'}}';
         }
         #endregion
-        #endregion
-
-        #region SchemaBuilderTrait
-        /**
-         * @inheritdoc
-         */
-        public function boolean()
-        {
-            $boolean = parent::boolean();
-
-            return $this->smallInteger(1);
-        }
-
-        /**
-         * @return Expression
-         */
-        public function now()
-        {
-            return new Expression('NOW()');
-        }
         #endregion
     }
