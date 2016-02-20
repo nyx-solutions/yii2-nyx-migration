@@ -20,7 +20,7 @@
   "minimum-stability": "stable",
   "require": {
     "yiisoft/yii2": "*",
-    "nox-it/yii2-nox/": "1.*",
+    "nox-it/yii2-nox": "1.*",
     "php": ">=5.4.0"
   },
   "autoload": {
