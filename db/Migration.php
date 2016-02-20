@@ -111,6 +111,19 @@
         }
 
         /**
+         * @param string $table
+         * @param string $column
+         *
+         * @return bool
+         *
+         * @throws NotSupportedException
+         */
+        public function fieldExists($table, $column)
+        {
+            return $this->columnExists($table, $column);
+        }
+
+        /**
          * @return string
          */
         protected function getTableOptions()
