@@ -18,7 +18,7 @@
          */
         public function boolean()
         {
-            return $this->smallInteger(1);
+            return $this->smallInteger(1)->unsigned();
         }
 
         /**
