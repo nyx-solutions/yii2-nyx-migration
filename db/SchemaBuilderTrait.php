@@ -2,6 +2,7 @@
 
     namespace nox\db;
 
+    use yii\db\ColumnSchemaBuilder;
     use yii\db\Expression;
 
     /**
@@ -14,7 +15,7 @@
         use \yii\db\SchemaBuilderTrait;
 
         /**
-         * @inheritdoc
+         * @return ColumnSchemaBuilder
          */
         public function boolean()
         {
