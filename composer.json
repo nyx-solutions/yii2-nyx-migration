@@ -10,7 +10,7 @@
     "php"
   ],
   "license": "Apache-2.0",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "authors": [
     {
       "name": "Jonatas Sas",
@@ -34,7 +34,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://bitbucket.org/nox-it-solutions/yii2-nox-migration"
+      "url": "https://bitbucket.org/noxit-plugins/yii2-nox-migration"
     }
   ]
 }
