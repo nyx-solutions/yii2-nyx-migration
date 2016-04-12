@@ -2,7 +2,6 @@
 
     namespace nox\db;
 
-    use yii\db\ColumnSchemaBuilder;
     use yii\db\Expression;
 
     /**
@@ -15,11 +14,13 @@
         use \yii\db\SchemaBuilderTrait;
 
         /**
-         * @return ColumnSchemaBuilder
+         * @param bool $true
+         *
+         * @return $this
          */
-        public function boolean()
+        public function smallIntegerBoolean($true = true)
         {
-            return $this->smallInteger(1)->unsigned();
+            return $this->smallInteger(1)->unsigned()->notNull()->defaultValue((((bool)$true) ? 1 : 0));
         }
 
         /**
