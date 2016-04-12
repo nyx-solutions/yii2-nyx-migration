@@ -17,11 +17,13 @@
         use SchemaBuilderTrait;
 
         #region Constants
-        const YES             = Schema::YES;
-        const NO              = Schema::NO;
+        const BIG_PK_DEFAULT_LENGTH = 20;
 
-        const STATUS_ACTIVE   = Schema::YES;
-        const STATUS_INACTIVE = Schema::NO;
+        const YES                   = Schema::YES;
+        const NO                    = Schema::NO;
+
+        const STATUS_ACTIVE         = Schema::YES;
+        const STATUS_INACTIVE       = Schema::NO;
         #endregion
 
         /**
