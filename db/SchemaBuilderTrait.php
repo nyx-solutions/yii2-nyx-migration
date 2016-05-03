@@ -2,6 +2,7 @@
 
     namespace nox\db;
 
+    use yii\db\ColumnSchemaBuilder;
     use yii\db\Expression;
 
     /**
@@ -16,7 +17,7 @@
         /**
          * @param bool $true
          *
-         * @return $this
+         * @return ColumnSchemaBuilder the column instance which can be further customized.
          */
         public function smallIntegerBoolean($true = true)
         {
