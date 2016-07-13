@@ -154,6 +154,24 @@
         }
 
         /**
+         * @inheritdoc
+         */
+        public function dropForeignKey($name, $table)
+        {
+            $indexName = $name;
+
+            if (preg_match('/\}\}$/', $indexName)) {
+                $indexName = preg_replace('/^(.*)\}\}$/', '$1_idx}}', $indexName);
+            } else {
+                $indexName .= '_idx';
+            }
+
+            parent::dropForeignKey($name, $table);
+
+            $this->dropIndex($indexName, $table);
+        }
+
+        /**
          * Builds a SQL statement for adding a foreign key constraint to an existing table (without index creation).
          * The method will properly quote the table and column names.
          * @param string $name the name of the foreign key constraint.
