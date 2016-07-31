@@ -154,6 +154,33 @@
         }
 
         /**
+         * Builds a SQL statement for adding a foreign key constraint to an existing table.
+         * The method will properly quote the table and column names.
+         *
+         * @param string       $name       the name of the foreign key constraint.
+         * @param string       $table      the table that the foreign key constraint will be added to.
+         * @param string|array $columns    the name of the column to that the constraint will be added on. If there are multiple columns, separate them with commas or use an array.
+         * @param string       $refTable   the table that the foreign key references to.
+         * @param string|array $refColumns the name of the column that the foreign key references to. If there are multiple columns, separate them with commas or use an array.
+         * @param string       $delete     the ON DELETE option. Most DBMS support these options: RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+         * @param string       $update     the ON UPDATE option. Most DBMS support these options: RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+         */
+        public function addUniqueForeignKey($name, $table, $columns, $refTable, $refColumns, $delete = null, $update = null)
+        {
+            $indexName = $name;
+
+            if (preg_match('/\}\}$/', $indexName)) {
+                $indexName = preg_replace('/^(.*)\}\}$/', '$1_idx}}', $indexName);
+            } else {
+                $indexName .= '_idx';
+            }
+
+            $this->createIndex($indexName, $table, $columns, true);
+
+            parent::addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete, $update);
+        }
+
+        /**
          * @inheritdoc
          */
         public function dropForeignKey($name, $table)
