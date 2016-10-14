@@ -17,7 +17,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 
 Either run
 
-```
+```bash
 php composer.phar require --prefer-dist nox-it/yii2-nox-migration "*"
 ```
 
@@ -31,7 +31,7 @@ to the require section of your `composer.json` file.
 
 ## Usage
 
-```
+```php
 use nox\db\Migration;
 
 class m150409_195340_site extends Migration
