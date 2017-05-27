@@ -41,6 +41,21 @@
          */
         protected $tableOptions;
 
+        /**
+         * @var string
+         */
+        public $tableCharacterSet = 'utf8';
+
+        /**
+         * @var string
+         */
+        public $tableCollate = 'utf8_unicode_ci';
+
+        /**
+         * @var string
+         */
+        public $tableEngine = 'InnoDB';
+
         #region Initialization
         /**
          * @inheritdoc
@@ -52,7 +67,7 @@
             parent::init();
 
             if ($this->db->driverName === 'mysql') {
-                $this->tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+                $this->tableOptions = "CHARACTER SET {$this->tableCharacterSet} COLLATE {$this->tableCollate} ENGINE={$this->tableEngine}";
             } else {
                 if ((bool)$this->onlyMySql) {
                     throw new NotSupportedException('MySQL required.');
@@ -62,6 +77,14 @@
         #endregion
 
         #region DataBase
+        /**
+         * @inheritdoc
+         */
+        public function safeDown()
+        {
+            $this->dropTable($this->getCurrentTableName());
+        }
+
         #region DataBase Tables
         /**
          * @param string $table
