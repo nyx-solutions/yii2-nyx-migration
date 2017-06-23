@@ -24,6 +24,11 @@
 
         const STATUS_ACTIVE         = Schema::YES;
         const STATUS_INACTIVE       = Schema::NO;
+
+        const ROW_FORMAT_COMPACT    = 'COMPACT';
+        const ROW_FORMAT_REDUNDANT  = 'REDUNDANT';
+        const ROW_FORMAT_DYNAMIC    = 'DYNAMIC';
+        const ROW_FORMAT_COMPRESSED = 'COMPRESSED';
         #endregion
 
         /**
@@ -56,6 +61,21 @@
          */
         public $tableEngine = 'InnoDB';
 
+        /**
+         * @var bool
+         */
+        public $useMysqlInnoDbRowFormat = true;
+
+        /**
+         * @var bool
+         */
+        public $useMysqlInnoDbBarracudaFileFormat = false;
+
+        /**
+         * @var string
+         */
+        public $mysqlInnoDbRowFormat = self::ROW_FORMAT_DYNAMIC;
+
         #region Initialization
         /**
          * @inheritdoc
@@ -67,7 +87,17 @@
             parent::init();
 
             if ($this->db->driverName === 'mysql') {
-                $this->tableOptions = "CHARACTER SET {$this->tableCharacterSet} COLLATE {$this->tableCollate} ENGINE={$this->tableEngine}";
+                $rowFormat = '';
+
+                if ($this->useMysqlInnoDbRowFormat && strtolower($this->tableEngine) == 'innodb') {
+                    $rowFormat = " ROW_FORMAT={$this->mysqlInnoDbRowFormat}";
+                }
+
+                if ($this->useMysqlInnoDbRowFormat && $this->useMysqlInnoDbBarracudaFileFormat && strtolower($this->tableEngine) == 'innodb') {
+                    $rowFormat = " ROW_FORMAT=".self::ROW_FORMAT_COMPRESSED;
+                }
+
+                $this->tableOptions = "CHARACTER SET {$this->tableCharacterSet} COLLATE {$this->tableCollate}{$rowFormat} ENGINE={$this->tableEngine}";
             } else {
                 if ((bool)$this->onlyMySql) {
                     throw new NotSupportedException('MySQL required.');
