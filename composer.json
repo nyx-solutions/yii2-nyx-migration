@@ -1,6 +1,6 @@
 {
   "name": "nox-it/yii2-nox-migration",
-  "description": "Yii2 Migration Toolkit Extended",
+  "description": "Yii2 Extended Migration Toolkit",
   "type": "library",
   "keywords": [
     "yii2",
@@ -10,7 +10,7 @@
     "php"
   ],
   "license": "BSD-3-Clause",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "authors": [
     {
       "name": "Jonatas Sas",
