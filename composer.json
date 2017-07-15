@@ -10,7 +10,7 @@
     "php"
   ],
   "license": "BSD-3-Clause",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "authors": [
     {
       "name": "Jonatas Sas",
@@ -20,7 +20,8 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=5.4.0",
-    "nox-it/yii2-nox": "1.*"
+    "nox-it/yii2-nox": "1.*",
+    "nox-it/yii2-nox-helpers": "1.*"
   },
   "autoload": {
     "psr-4": {

@@ -2,6 +2,7 @@
 
     namespace nox\db;
 
+    use nox\helpers\InflectorHelper;
     use yii\base\NotSupportedException;
     use yii\db\Connection;
 
@@ -29,6 +30,8 @@
         const ROW_FORMAT_REDUNDANT  = 'REDUNDANT';
         const ROW_FORMAT_DYNAMIC    = 'DYNAMIC';
         const ROW_FORMAT_COMPRESSED = 'COMPRESSED';
+
+        const NAME_MAX_LENGTH       = 31;
         #endregion
 
         /**
@@ -341,6 +344,29 @@
         public function withTableName($name)
         {
             return '{{%'.$this->getSimpleTableName().'_'.$name.'}}';
+        }
+
+        /**
+         * @param string  $name
+         * @param integer $max
+         *
+         * @return string
+         */
+        public function getFieldName($name, $max = self::NAME_MAX_LENGTH)
+        {
+            $tableName            = InflectorHelper::camel2id(((!empty($this->db->tablePrefix)) ? "{$this->db->tablePrefix}_" : '').$this->getSimpleTableName(), '_');
+            $tableNameInitials    = '';
+            $tableNameInitialsAux = explode('_', $tableName);
+
+            foreach ($tableNameInitialsAux as $initial) {
+                $tableNameInitials .= $initial;
+            }
+
+            $fieldName = InflectorHelper::camel2id($name, '_');
+
+            $newFieldName = "{$tableNameInitials}_{$fieldName}";
+
+            return $newFieldName;
         }
         #endregion
         #endregion
