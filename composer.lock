@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fc67f27f4942deecb439437cc3bb805",
+    "content-hash": "a0dec0f5a79dac8b0d8b01a9d49689a9",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -307,6 +307,50 @@
                 "yii2"
             ],
             "time": "2017-05-27T12:45:41+00:00"
+        },
+        {
+            "name": "nox-it/yii2-nox-helpers",
+            "version": "1.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nox-it/yii2-nox-helpers.git",
+                "reference": "efa12525258a87790544aff24f603794483369bd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nox-it/yii2-nox-helpers/zipball/efa12525258a87790544aff24f603794483369bd",
+                "reference": "efa12525258a87790544aff24f603794483369bd",
+                "shasum": ""
+            },
+            "require": {
+                "nox-it/yii2-nox": "1.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "nox\\helpers\\": "helpers/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Jonatas Sas",
+                    "email": "atendimento@jsas.com.br"
+                }
+            ],
+            "description": "Yii2 NOX Helpers",
+            "keywords": [
+                "extension",
+                "framework",
+                "helpers",
+                "php",
+                "yii2"
+            ],
+            "time": "2017-06-08T15:26:29+00:00"
         },
         {
             "name": "yiisoft/yii2",
