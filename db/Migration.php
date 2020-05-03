@@ -3,8 +3,8 @@
     namespace nox\db;
 
     use nox\helpers\InflectorHelper;
+    use Yii;
     use yii\base\NotSupportedException;
-    use yii\db\Connection;
 
     /**
      * Class Migration
@@ -37,47 +37,47 @@
         /**
          * @var bool
          */
-        protected $onlyMySql = false;
+        protected bool $onlyMySql = false;
 
         /**
          * @var string
          */
-        protected $tableName;
+        protected string $tableName;
 
         /**
          * @var string
          */
-        protected $tableOptions;
+        protected string $tableOptions;
 
         /**
          * @var string
          */
-        public $tableCharacterSet = 'utf8';
+        public string $tableCharacterSet = 'utf8';
 
         /**
          * @var string
          */
-        public $tableCollate = 'utf8_unicode_ci';
+        public string $tableCollate = 'utf8_unicode_ci';
 
         /**
          * @var string
          */
-        public $tableEngine = 'InnoDB';
+        public string $tableEngine = 'InnoDB';
 
         /**
          * @var bool
          */
-        public $useMysqlInnoDbRowFormat = true;
+        public bool $useMysqlInnoDbRowFormat = true;
 
         /**
          * @var bool
          */
-        public $useMysqlInnoDbBarracudaFileFormat = false;
+        public bool $useMysqlInnoDbBarracudaFileFormat = false;
 
         /**
          * @var string
          */
-        public $mysqlInnoDbRowFormat = self::ROW_FORMAT_DYNAMIC;
+        public string $mysqlInnoDbRowFormat = self::ROW_FORMAT_DYNAMIC;
 
         #region Initialization
         /**
@@ -128,7 +128,7 @@
          */
         public function tableExists($table)
         {
-            $db     = \Yii::$app->db;
+            $db     = Yii::$app->db;
             $schema = $db->getSchema();
 
             $tables        = $schema->getTableNames();
@@ -152,8 +152,8 @@
         public function columnExists($table, $column)
         {
             if ($this->tableExists($table)) {
-                /** @var Connection $db */
-                $db     = \Yii::$app->db;
+                $db = Yii::$app->db;
+
                 $schema = $db->getSchema();
 
                 $columns = $schema->getTableSchema($table)->getColumnNames();
@@ -193,6 +193,8 @@
         #region DataBase FKs
         /**
          * @inheritdoc
+         *
+         * @noinspection RegExpRedundantEscape
          */
         public function addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete = null, $update = null)
         {
@@ -220,6 +222,8 @@
          * @param string|array $refColumns the name of the column that the foreign key references to. If there are multiple columns, separate them with commas or use an array.
          * @param string       $delete     the ON DELETE option. Most DBMS support these options: RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
          * @param string       $update     the ON UPDATE option. Most DBMS support these options: RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+         *
+         * @noinspection RegExpRedundantEscape
          */
         public function addUniqueForeignKey($name, $table, $columns, $refTable, $refColumns, $delete = null, $update = null)
         {
@@ -238,6 +242,8 @@
 
         /**
          * @inheritdoc
+         *
+         * @noinspection RegExpRedundantEscape
          */
         public function dropForeignKey($name, $table)
         {
@@ -278,6 +284,8 @@
          * @param string $view
          *
          * @return bool
+         *
+         * @throws NotSupportedException
          */
         public function viewExists($view)
         {
@@ -295,6 +303,8 @@
 
         /**
          * @param string $view
+         *
+         * @throws NotSupportedException
          */
         public function dropView($view)
         {
@@ -307,6 +317,8 @@
         #region DataBase Table Names
         /**
          * @return string
+         *
+         * @noinspection RegExpRedundantEscape
          */
         protected function getSimpleTableName()
         {
@@ -337,6 +349,14 @@
         }
 
         /**
+         * @return string
+         */
+        public function findCurrentTableName()
+        {
+            return $this->getTableName();
+        }
+
+        /**
          * @param string $name
          *
          * @return string
@@ -347,12 +367,11 @@
         }
 
         /**
-         * @param string  $name
-         * @param integer $max
+         * @param string $name
          *
          * @return string
          */
-        public function getFieldName($name, $max = self::NAME_MAX_LENGTH)
+        public function getFieldName($name)
         {
             $tableName            = InflectorHelper::camel2id(((!empty($this->db->tablePrefix)) ? "{$this->db->tablePrefix}_" : '').$this->getSimpleTableName(), '_');
             $tableNameInitials    = '';
@@ -364,9 +383,7 @@
 
             $fieldName = InflectorHelper::camel2id($name, '_');
 
-            $newFieldName = "{$tableNameInitials}_{$fieldName}";
-
-            return $newFieldName;
+            return "{$tableNameInitials}_{$fieldName}";
         }
         #endregion
         #endregion

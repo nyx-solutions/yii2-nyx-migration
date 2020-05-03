@@ -2,7 +2,9 @@
 
     namespace nox\db;
 
+    use yii\base\NotSupportedException;
     use yii\db\ColumnSchemaBuilder;
+    use yii\db\Connection;
     use yii\db\Expression;
 
     /**
@@ -15,13 +17,16 @@
         use \yii\db\SchemaBuilderTrait;
 
         /**
-         * @return \yii\db\Connection the database connection to be used for schema building.
+         * @return Connection the database connection to be used for schema building.
          */
         protected abstract function getDb();
 
         /**
          * Creates a medium text column.
+         *
          * @return ColumnSchemaBuilder the column instance which can be further customized.
+         *
+         * @throws NotSupportedException
          */
         public function mediumText()
         {
@@ -30,7 +35,10 @@
 
         /**
          * Creates a long text column.
+         *
          * @return ColumnSchemaBuilder the column instance which can be further customized.
+         *
+         * @throws NotSupportedException
          */
         public function longText()
         {
@@ -39,7 +47,10 @@
 
         /**
          * Creates a tiny text column.
+         *
          * @return ColumnSchemaBuilder the column instance which can be further customized.
+         *                             
+         * @throws NotSupportedException
          */
         public function tinyText()
         {
