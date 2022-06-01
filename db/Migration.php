@@ -1,15 +1,15 @@
 <?php
 
-    namespace nox\db;
+    namespace nyx\db;
 
-    use nox\helpers\InflectorHelper;
+    use nyx\helpers\InflectorHelper;
     use Yii;
     use yii\base\NotSupportedException;
 
     /**
      * Class Migration
      *
-     * @package nox\migrations\Migration
+     * @package nyx\migrations\Migration
      *
      * @author Jonatas Sas <atendimento@jsas.com.br>
      */

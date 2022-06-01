@@ -1,6 +1,6 @@
 <?php
 
-    namespace nox\db;
+    namespace nyx\db;
 
     /**
      * Class Schema

@@ -1,6 +1,6 @@
 <?php
 
-    namespace nox\db;
+    namespace nyx\db;
 
     use yii\base\NotSupportedException;
     use yii\db\ColumnSchemaBuilder;
