@@ -1,7 +1,7 @@
-Yii PHP Framework Version 2 / NOX Migration Library
+Yii PHP Framework Version 2 / NYX Migration Library
 ===================================================
 
-Yii2 NOX Migration is a library with Migrations methods for Yii2. 
+Yii2 NYX Migration is a library with Migrations methods for Yii2. 
 
 [![Latest Stable Version](https://poser.pugx.org/nyx-solutions/yii2-nyx-migration/v/stable)](https://packagist.org/packages/nyx-solutions/yii2-nyx-migration)
 [![Total Downloads](https://poser.pugx.org/nyx-solutions/yii2-nyx-migration/downloads)](https://packagist.org/packages/nyx-solutions/yii2-nyx-migration)

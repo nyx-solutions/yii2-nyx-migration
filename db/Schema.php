@@ -3,12 +3,10 @@
     namespace nyx\db;
 
     /**
-     * Class Schema
-     *
-     * @author Jonatas Sas <atendimento@jsas.com.br>
+     * Schema
      */
     abstract class Schema extends \yii\db\Schema
     {
-        const YES = 1;
-        const NO  = 0;
+        public const YES = 1;
+        public const NO  = 0;
     }
